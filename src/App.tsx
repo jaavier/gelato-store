@@ -5,7 +5,8 @@ import ResumeShoppingCart from "./components/shopping-cart/resume";
 
 function App() {
   return (
-    <>
+    <div className="flex justify-center">
+      <div className="w-1/3">
       <Navbar />
       <ResumeShoppingCart />
       <Router>
@@ -13,7 +14,8 @@ function App() {
           <Route path="/" element={<Home />} />
         </Routes>
       </Router>
-    </>
+      </div>
+    </div>
   );
 }
 
