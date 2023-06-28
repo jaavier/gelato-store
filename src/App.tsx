@@ -4,6 +4,8 @@ import Navbar from "./components/navbar";
 import ResumeShoppingCart from "./components/shopping-cart/resume";
 import { ContextProvider } from "./context";
 import OrderSent from "./pages/order-sent";
+import Login from "./pages/user/login";
+import Register from "./pages/user/register";
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/order" element={<OrderSent />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
             </Routes>
             <ResumeShoppingCart />
           </div>
