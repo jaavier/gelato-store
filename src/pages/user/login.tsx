@@ -43,6 +43,7 @@ export default function Login() {
     <div className="bg-white py-10">
       <form onSubmit={onSubmit}>
         <div className="flex items-center flex-col gap-2">
+        <div className="mb-5 text-2xl font-extrabold tracking-wider font-nunito">Login</div>
           <div className="w-1/2">
             <div className="font-nunito tracking-wide text-lg font-bold">
               Username
