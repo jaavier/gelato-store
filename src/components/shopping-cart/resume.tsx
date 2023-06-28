@@ -1,4 +1,4 @@
-import { faCogs, faShoppingBasket } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faShoppingBasket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useApp from "../../context/useApp";
 import { Modal } from "../modal";
@@ -24,7 +24,7 @@ export default function ResumeShoppingCart() {
             ))}
             <div className="flex justify-start">
               <div className="rounded-full bg-pink-600 text-white py-2 px-4 cursor-pointer w-fit text-center">
-                <FontAwesomeIcon icon={faCogs} /> Send Order
+                <FontAwesomeIcon icon={faCheck} /> Send Order
               </div>
             </div>
           </div>
