@@ -1,11 +1,13 @@
-import React, { createContext, ReactNode } from "react";
+import React, { createContext, ReactNode, useState } from "react";
 
 export interface TypeContext {
   shoppingCart: IceCream[];
+  setShoppingCart: React.Dispatch<React.SetStateAction<IceCream[]>>;
 }
 
 const Context = createContext<TypeContext>({
   shoppingCart: [],
+  setShoppingCart: () => {},
 });
 
 interface ContextProviderProps {
@@ -13,9 +15,13 @@ interface ContextProviderProps {
 }
 
 const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
+  const [shoppingCart, setShoppingCart] = useState<IceCream[]>([]);
+
   const values: TypeContext = {
-    shoppingCart: [],
+    shoppingCart,
+    setShoppingCart,
   };
+  console.log("shoppingCart", shoppingCart);
 
   return <Context.Provider value={values}>{children}</Context.Provider>;
 };

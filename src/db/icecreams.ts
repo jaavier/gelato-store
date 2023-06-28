@@ -18,6 +18,8 @@ const icecreams: IceCreamsByCategory = {
       likes: 20,
       image: IceCream1,
       category: "Classics",
+      sauces: ["Chocolate", "Caramel", "Strawberry"],
+      sauceSelected: "",
     },
     {
       id: "2",
@@ -27,6 +29,8 @@ const icecreams: IceCreamsByCategory = {
       likes: 15,
       image: IceCream2,
       category: "Classics",
+      sauces: ["Caramel", "Raspberry", "Mint"],
+      sauceSelected: "",
     },
     {
       id: "3",
@@ -36,6 +40,8 @@ const icecreams: IceCreamsByCategory = {
       likes: 18,
       image: IceCream3,
       category: "Classics",
+      sauces: ["Whipped Cream", "Chocolate", "Banana"],
+      sauceSelected: "",
     },
   ],
   Fruits: [
@@ -47,6 +53,8 @@ const icecreams: IceCreamsByCategory = {
       likes: 12,
       image: IceCream4,
       category: "Fruits",
+      sauces: ["Passion Fruit", "Coconut", "Lime"],
+      sauceSelected: "",
     },
     {
       id: "5",
@@ -56,6 +64,8 @@ const icecreams: IceCreamsByCategory = {
       likes: 10,
       image: IceCream5,
       category: "Fruits",
+      sauces: ["Blueberry Syrup", "Whipped Cream", "Almonds"],
+      sauceSelected: "",
     },
     {
       id: "6",
@@ -65,6 +75,8 @@ const icecreams: IceCreamsByCategory = {
       likes: 8,
       image: IceCream13,
       category: "Fruits",
+      sauces: ["Watermelon Syrup", "Mint", "Lime"],
+      sauceSelected: "",
     },
   ],
   NutsAndSweets: [
@@ -76,6 +88,8 @@ const icecreams: IceCreamsByCategory = {
       likes: 14,
       image: IceCream7,
       category: "Nuts and Sweets",
+      sauces: ["Caramel", "Crushed Nuts", "Chocolate Drizzle"],
+      sauceSelected: "",
     },
     {
       id: "8",
@@ -85,6 +99,8 @@ const icecreams: IceCreamsByCategory = {
       likes: 10,
       image: IceCream8,
       category: "Nuts and Sweets",
+      sauces: ["Nutella", "Caramel", "Toasted Hazelnuts"],
+      sauceSelected: "",
     },
     {
       id: "9",
@@ -94,6 +110,8 @@ const icecreams: IceCreamsByCategory = {
       likes: 16,
       image: IceCream9,
       category: "Nuts and Sweets",
+      sauces: ["Salted Caramel Sauce", "Whipped Cream", "Sea Salt"],
+      sauceSelected: "",
     },
   ],
   // ... agregar más categorías y helados según tus necesidades
