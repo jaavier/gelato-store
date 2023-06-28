@@ -1,10 +1,13 @@
 import { useState } from "react";
 import useApp from "../../context/useApp";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 export default function One({
   icecream,
   handleClick,
   showCounter = false,
+  deletable = false,
 }: any) {
   const { shoppingCart, setShoppingCart } = useApp();
   const [counter, setCounter] = useState<number>(1);
@@ -14,7 +17,15 @@ export default function One({
     if (shoppingCart.includes(icecream)) {
       setShoppingCart(
         shoppingCart.filter(
-          (_icecream: IceCream) => _icecream.id !== icecream._id
+          (_icecream: IceCream) => _icecream.id !== icecream.id
+        )
+      );
+      window.localStorage.setItem(
+        "cartItems",
+        JSON.stringify(
+          shoppingCart.filter(
+            (_icecream: IceCream) => _icecream.id !== icecream.id
+          )
         )
       );
     } else {
@@ -26,20 +37,21 @@ export default function One({
         };
         newItems.push(tmpIceCream);
       }
+      window.localStorage.setItem("cartItems", JSON.stringify(newItems));
       setShoppingCart([...shoppingCart, ...newItems]);
     }
     setCounter(1);
     setSauceSelected("");
-    handleClick();
+    handleClick && handleClick();
   };
 
   return (
     icecream && (
       <>
         <div
-          className={`flex justify-between items-center font-nunito hover:cursor-pointer mt-3`}
+          className={`flex gap-5 justify-between items-center font-nunito hover:cursor-pointer mt-3`}
           onClick={() => {
-            handleClick(icecream);
+            handleClick && handleClick(icecream);
           }}
         >
           <div className="w-3/4 pr-4 flex flex-col justify-center">
@@ -54,7 +66,33 @@ export default function One({
             ) : null}
             {!showCounter ? (
               <div className="font-bold font-pacific text-xl">
-                ${icecream.price}{" "}
+                <div>
+                  ${icecream.price}{" "}
+                  {deletable && (
+                    <button
+                      className="text-xl"
+                      onClick={() => {
+                        setShoppingCart(
+                          shoppingCart.filter(
+                            (_icecream: IceCream) =>
+                              _icecream.id !== icecream.id
+                          )
+                        );
+                        window.localStorage.setItem(
+                          "cartItems",
+                          JSON.stringify(
+                            shoppingCart.filter(
+                              (_icecream: IceCream) =>
+                                _icecream.id !== icecream.id
+                            )
+                          )
+                        );
+                      }}
+                    >
+                      <FontAwesomeIcon icon={faTrash} />
+                    </button>
+                  )}
+                </div>
               </div>
             ) : null}
           </div>
@@ -93,7 +131,7 @@ export default function One({
                 <div
                   className="px-3 text-2xl h-9 rounded-l-md bg-gray-200 outline-none"
                   onClick={() => {
-                    if (counter > 0) setCounter(counter - 1);
+                    if (counter > 1) setCounter(counter - 1);
                   }}
                 >
                   -

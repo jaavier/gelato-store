@@ -7,7 +7,7 @@ import One from "../items/one";
 import { Link, useLocation } from "react-router-dom";
 
 export default function ResumeShoppingCart() {
-  const { shoppingCart } = useApp();
+  const { setOrderReceived, shoppingCart, setShoppingCart } = useApp();
   const location = useLocation();
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
 
@@ -37,7 +37,19 @@ export default function ResumeShoppingCart() {
               </div>
               <div className="flex justify-start">
                 <div className="rounded-full bg-pink-600 text-white py-2 px-4 cursor-pointer w-fit text-center">
-                  <Link to="/order" onClick={() => setModalIsOpen(false)}>
+                  <Link
+                    to="/order"
+                    onClick={() => {
+                      setOrderReceived(shoppingCart);
+                      localStorage.setItem("shoppingCart", "[]");
+                      localStorage.setItem(
+                        "orderReceived", // cambiar luego por multiples ordenes
+                        JSON.stringify(shoppingCart)
+                      );
+                      setShoppingCart([]);
+                      setModalIsOpen(false);
+                    }}
+                  >
                     <FontAwesomeIcon icon={faCheck} /> Send Order
                   </Link>
                 </div>
@@ -45,7 +57,7 @@ export default function ResumeShoppingCart() {
             </div>
           }
         />
-        {location.pathname !== "/order" && (
+        {location.pathname !== "/order" && shoppingCart.length && (
           <div className="fixed bottom-10 lg:w-1/3 md:w-1/2 w-11/12 px-14">
             <div className="rounded-full bg-pink-600 text-lg text-white p-2 cursor-pointer">
               <div className="flex justify-between items-center">
