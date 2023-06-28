@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
-import { createServer, Model, Server } from "miragejs";
+import { createServer, Model } from "miragejs";
 import icecreams from "./db/icecreams";
 import "./index.css";
 
@@ -12,9 +12,8 @@ const server = createServer({
 
   routes() {
     this.namespace = "api";
-    this.get("/icecreams", (schema: Server<IceCream>): Record<string, any> => {
-      const icecreams: any = schema.db.icecreams.where({}).pop();
-      console.log("🚀 ~ file: main.tsx:18 ~ this.get ~ icecreams:", icecreams);
+    this.get("/icecreams", (schema: any): Record<string, any> => {
+      const icecreams: any = schema.db.icecreams.pop();
       const output: Record<string, any> = {};
       const categories = Object.keys(icecreams);
       for (const category of categories) {
