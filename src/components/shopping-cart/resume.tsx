@@ -13,7 +13,7 @@ export default function ResumeShoppingCart() {
 
   const onDelete = useCallback(() => {
     setModalIsOpen(false);
-  }, [])
+  }, []);
 
   return (
     shoppingCart.length > 0 && (
@@ -26,7 +26,11 @@ export default function ResumeShoppingCart() {
               <div className="font-pacific text-3xl">Cart</div>
               {shoppingCart?.map((icecream: IceCream, index: number) => (
                 <div key={index} className="my-2">
-                  <One icecream={icecream} deletable={true} onDelete={onDelete} />
+                  <One
+                    icecream={icecream}
+                    deletable={true}
+                    onDelete={onDelete}
+                  />
                 </div>
               ))}
               <div className="flex justify-start gap-1 border-t border-gray-200 mt-5 h-14 items-center">

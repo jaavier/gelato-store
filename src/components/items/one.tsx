@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useApp from "../../context/useApp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 function generateID(): string {
-  const characters: string = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const characters: string =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   let id = "";
 
   for (let i = 0; i < 20; i++) {
@@ -15,46 +16,33 @@ function generateID(): string {
   return id;
 }
 
-
 export default function One({
   icecream,
   handleClick,
   showCounter = false,
   deletable = false,
-  onDelete = () => {}
+  onDelete = () => {},
 }: any) {
   const { shoppingCart, setShoppingCart } = useApp();
   const [counter, setCounter] = useState<number>(1);
   const [sauceSelected, setSauceSelected] = useState<string>("");
 
   const addToCart = () => {
-    if (shoppingCart.includes(icecream)) {
-      setShoppingCart(
-        shoppingCart.filter(
-          (_icecream: IceCream) => _icecream.id !== icecream.id
-        )
-      );
-      window.localStorage.setItem(
-        "cartItems",
-        JSON.stringify(
-          shoppingCart.filter(
-            (_icecream: IceCream) => _icecream.id !== icecream.id
-          )
-        )
-      );
-    } else {
-      const newItems: IceCream[] = [];
-      for (let i = 0; i < counter; i++) {
-        const tmpIceCream: IceCream = {
-          ...icecream,
-          id: generateID(),
-          sauceSelected: sauceSelected,
-        };
-        newItems.push(tmpIceCream);
-      }
-      window.localStorage.setItem("cartItems", JSON.stringify(newItems));
-      setShoppingCart([...shoppingCart, ...newItems]);
+    const newItems = [];
+    for (let i = 0; i < counter; i++) {
+      const tmpIceCream = {
+        ...icecream,
+        id: generateID(),
+        sauceSelected: sauceSelected,
+      };
+      newItems.push(tmpIceCream);
     }
+
+    const updatedCartItems = [...shoppingCart, ...newItems];
+    setShoppingCart(updatedCartItems);
+
+    localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+
     setCounter(1);
     setSauceSelected("");
     handleClick && handleClick();
@@ -88,9 +76,8 @@ export default function One({
                       className="text-xl"
                       onClick={() => {
                         const newShoppingCart = shoppingCart.filter(
-                          (_icecream: IceCream) =>
-                            _icecream.id !== icecream.id
-                        )
+                          (_icecream: IceCream) => _icecream.id !== icecream.id
+                        );
                         setShoppingCart(newShoppingCart);
                         window.localStorage.setItem(
                           "cartItems",
@@ -101,7 +88,7 @@ export default function One({
                             )
                           )
                         );
-                        if (newShoppingCart.length === 0) onDelete()
+                        if (newShoppingCart.length === 0) onDelete();
                       }}
                     >
                       <FontAwesomeIcon icon={faTrash} />
