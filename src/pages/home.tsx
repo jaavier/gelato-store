@@ -6,7 +6,7 @@ export default function Home() {
     <div className="">
       <div className="flex justify-center items-center bg-white shadow-sm rounded-b-xl">
         <div className="w-full">
-          <div className="w-full flex justify-center py-5 bg-violet-100">
+          <div className="w-full flex justify-center py-5 bg-pink-200">
             <img src={IceCreamLogo} className="w-1/3" />
           </div>
           <div className="w-full px-8 text-justify border-t py-5">
