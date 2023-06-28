@@ -51,14 +51,14 @@ export default function One({
               <div className="flex gap-1 font-extrabold">
                 <div>Sauce: {icecream.sauceSelected}</div>
               </div>
-            ) : (
-              ""
-            )}
-            <div className="mt-1 font-bold font-pacific text-xl">
-              ${icecream.price}{" "}
-            </div>
+            ) : null}
+            {!showCounter ? (
+              <div className="font-bold font-pacific text-xl">
+                ${icecream.price}{" "}
+              </div>
+            ) : null}
           </div>
-          <div className="w-28 lg:w-32 hover:cursor-pointer bg-pink-50 lg:p-4 p-2 rounded-md mr-4 lg:mt-1">
+          <div className={`w-28 lg:w-32 hover:cursor-pointer bg-pink-50 lg:p-4 p-2 rounded-md ${showCounter ? 'mr-0' : 'mr-4'} lg:mt-1`}>
             <img src={icecream.image} alt={icecream.name} />
           </div>
         </div>
