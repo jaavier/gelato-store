@@ -63,7 +63,7 @@ export default function Items() {
               />
             </div>
           </div>
-          <div className={`${!isOpen[category] ? 'block' : 'hidden'}`}>
+          <div className={`${!isOpen[category] ? "block" : "hidden"}`}>
             <IceCreamList
               icecreams={icecreams}
               category={category}

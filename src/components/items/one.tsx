@@ -29,7 +29,7 @@ export default function One({
       setShoppingCart([...shoppingCart, ...newItems]);
     }
     setCounter(1);
-    setSauceSelected("")
+    setSauceSelected("");
     handleClick();
   };
 
@@ -75,7 +75,7 @@ export default function One({
                     value={1}
                     checked={sauceSelected === sauce}
                     onClick={() => setSauceSelected(sauce)}
-                    onChange={()=>{}}
+                    onChange={() => {}}
                   />
                 </div>
               </div>
