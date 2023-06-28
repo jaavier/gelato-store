@@ -1,45 +1,60 @@
 import { useState } from "react";
 import useApp from "../../context/useApp";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+
+function generateID(): string {
+  const characters: string =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let id = "";
+
+  for (let i = 0; i < 20; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    id += characters.charAt(randomIndex);
+  }
+
+  return id;
+}
 
 export default function One({
   icecream,
   handleClick,
   showCounter = false,
+  deletable = false,
+  onDelete = () => {},
 }: any) {
   const { shoppingCart, setShoppingCart } = useApp();
   const [counter, setCounter] = useState<number>(1);
   const [sauceSelected, setSauceSelected] = useState<string>("");
 
   const addToCart = () => {
-    if (shoppingCart.includes(icecream)) {
-      setShoppingCart(
-        shoppingCart.filter(
-          (_icecream: IceCream) => _icecream.id !== icecream._id
-        )
-      );
-    } else {
-      const newItems: IceCream[] = [];
-      for (let i = 0; i < counter; i++) {
-        const tmpIceCream: IceCream = {
-          ...icecream,
-          sauceSelected: sauceSelected,
-        };
-        newItems.push(tmpIceCream);
-      }
-      setShoppingCart([...shoppingCart, ...newItems]);
+    const newItems = [];
+    for (let i = 0; i < counter; i++) {
+      const tmpIceCream = {
+        ...icecream,
+        id: generateID(),
+        sauceSelected: sauceSelected,
+      };
+      newItems.push(tmpIceCream);
     }
+
+    const updatedCartItems = [...shoppingCart, ...newItems];
+    setShoppingCart(updatedCartItems);
+
+    localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+
     setCounter(1);
     setSauceSelected("");
-    handleClick();
+    handleClick && handleClick();
   };
 
   return (
     icecream && (
       <>
         <div
-          className={`flex justify-between items-center font-nunito hover:cursor-pointer mt-3`}
+          className={`flex gap-5 justify-between items-center font-nunito hover:cursor-pointer mt-3`}
           onClick={() => {
-            handleClick(icecream);
+            handleClick && handleClick(icecream);
           }}
         >
           <div className="w-3/4 pr-4 flex flex-col justify-center">
@@ -54,7 +69,32 @@ export default function One({
             ) : null}
             {!showCounter ? (
               <div className="font-bold font-pacific text-xl">
-                ${icecream.price}{" "}
+                <div>
+                  ${icecream.price}{" "}
+                  {deletable && (
+                    <button
+                      className="text-xl"
+                      onClick={() => {
+                        const newShoppingCart = shoppingCart.filter(
+                          (_icecream: IceCream) => _icecream.id !== icecream.id
+                        );
+                        setShoppingCart(newShoppingCart);
+                        window.localStorage.setItem(
+                          "cartItems",
+                          JSON.stringify(
+                            shoppingCart.filter(
+                              (_icecream: IceCream) =>
+                                _icecream.id !== icecream.id
+                            )
+                          )
+                        );
+                        if (newShoppingCart.length === 0) onDelete();
+                      }}
+                    >
+                      <FontAwesomeIcon icon={faTrash} />
+                    </button>
+                  )}
+                </div>
               </div>
             ) : null}
           </div>
@@ -93,7 +133,7 @@ export default function One({
                 <div
                   className="px-3 text-2xl h-9 rounded-l-md bg-gray-200 outline-none"
                   onClick={() => {
-                    if (counter > 0) setCounter(counter - 1);
+                    if (counter > 1) setCounter(counter - 1);
                   }}
                 >
                   -
