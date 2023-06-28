@@ -43,7 +43,7 @@ export default function ResumeShoppingCart() {
         <div className="rounded-full bg-pink-600 text-lg text-white p-2 cursor-pointer">
           <div className="flex justify-between items-center">
             <div
-              className="w-full text-center ml-12 font-bold"
+              className="w-full text-center ml-6 lg:ml-12 font-bold"
               onClick={() => shoppingCart.length && setModalIsOpen(true)}
             >
               <FontAwesomeIcon icon={faShoppingBasket} /> View order
