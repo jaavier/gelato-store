@@ -22,6 +22,15 @@ export default function ResumeShoppingCart() {
                 <One icecream={icecream} />
               </div>
             ))}
+            <div className="flex justify-start gap-1 border-t border-gray-200 mt-5 h-14 items-center">
+              <div className="font-nunito text-xl">Subtotal:</div>
+              <div className="font-pacific text-2xl mb-2">
+                ${" "}
+                {shoppingCart
+                  .map((icecream: IceCream) => icecream.price)
+                  .reduce((acc: number, current: number) => acc + current, 0)}
+              </div>
+            </div>
             <div className="flex justify-start">
               <div className="rounded-full bg-pink-600 text-white py-2 px-4 cursor-pointer w-fit text-center">
                 <FontAwesomeIcon icon={faCheck} /> Send Order

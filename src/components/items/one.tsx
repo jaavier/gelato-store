@@ -37,7 +37,7 @@ export default function One({
     icecream && (
       <>
         <div
-          className={`flex justify-between items-center font-nunito hover:cursor-pointer my-4`}
+          className={`flex justify-between items-center font-nunito hover:cursor-pointer mt-3`}
           onClick={() => {
             handleClick(icecream);
           }}
@@ -58,7 +58,7 @@ export default function One({
               ${icecream.price}{" "}
             </div>
           </div>
-          <div className="w-28 lg:w-32 hover:cursor-pointer bg-pink-50 lg:p-4 p-2 rounded-md lg:mr-5 mr-3">
+          <div className="w-28 lg:w-32 hover:cursor-pointer bg-pink-50 lg:p-4 p-2 rounded-md mr-4 lg:mt-1">
             <img src={icecream.image} alt={icecream.name} />
           </div>
         </div>

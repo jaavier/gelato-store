@@ -37,6 +37,7 @@ export default function Items() {
         onClose={() => setModalIsOpen(false)}
         children={
           <div className="">
+            <div className="font-pacific text-3xl font-bold">Add new</div>
             <One
               icecream={currentIceCream}
               showCounter={true}
