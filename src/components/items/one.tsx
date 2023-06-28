@@ -1,13 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useApp from "../../context/useApp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+
+function generateID(): string {
+  const characters: string = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let id = "";
+
+  for (let i = 0; i < 20; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    id += characters.charAt(randomIndex);
+  }
+
+  return id;
+}
+
 
 export default function One({
   icecream,
   handleClick,
   showCounter = false,
   deletable = false,
+  onDelete = () => {}
 }: any) {
   const { shoppingCart, setShoppingCart } = useApp();
   const [counter, setCounter] = useState<number>(1);
@@ -33,6 +47,7 @@ export default function One({
       for (let i = 0; i < counter; i++) {
         const tmpIceCream: IceCream = {
           ...icecream,
+          id: generateID(),
           sauceSelected: sauceSelected,
         };
         newItems.push(tmpIceCream);
@@ -72,12 +87,11 @@ export default function One({
                     <button
                       className="text-xl"
                       onClick={() => {
-                        setShoppingCart(
-                          shoppingCart.filter(
-                            (_icecream: IceCream) =>
-                              _icecream.id !== icecream.id
-                          )
-                        );
+                        const newShoppingCart = shoppingCart.filter(
+                          (_icecream: IceCream) =>
+                            _icecream.id !== icecream.id
+                        )
+                        setShoppingCart(newShoppingCart);
                         window.localStorage.setItem(
                           "cartItems",
                           JSON.stringify(
@@ -87,6 +101,7 @@ export default function One({
                             )
                           )
                         );
+                        if (newShoppingCart.length === 0) onDelete()
                       }}
                     >
                       <FontAwesomeIcon icon={faTrash} />

@@ -2,7 +2,7 @@ import { faCheck, faShoppingBasket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useApp from "../../context/useApp";
 import { Modal } from "../modal";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import One from "../items/one";
 import { Link, useLocation } from "react-router-dom";
 
@@ -10,6 +10,10 @@ export default function ResumeShoppingCart() {
   const { setOrderReceived, shoppingCart, setShoppingCart } = useApp();
   const location = useLocation();
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+
+  const onDelete = useCallback(() => {
+    setModalIsOpen(false);
+  }, [])
 
   return (
     shoppingCart.length > 0 && (
@@ -22,7 +26,7 @@ export default function ResumeShoppingCart() {
               <div className="font-pacific text-3xl">Cart</div>
               {shoppingCart?.map((icecream: IceCream, index: number) => (
                 <div key={index} className="my-2">
-                  <One icecream={icecream} />
+                  <One icecream={icecream} deletable={true} onDelete={onDelete} />
                 </div>
               ))}
               <div className="flex justify-start gap-1 border-t border-gray-200 mt-5 h-14 items-center">
