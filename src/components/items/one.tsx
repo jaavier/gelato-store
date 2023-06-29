@@ -2,6 +2,7 @@ import { useState } from "react";
 import useApp from "../../context/useApp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import trackEvent from "../../helpers/trackEvent";
 
 function generateID(): string {
   const characters: string =
@@ -21,7 +22,7 @@ export default function One({
   handleClick,
   showCounter = false,
   deletable = false,
-  onDelete = (_data?: any) => {},
+  onDelete = () => {},
 }: any) {
   const { shoppingCart, setShoppingCart } = useApp();
   const [counter, setCounter] = useState<number>(1);
@@ -37,7 +38,12 @@ export default function One({
       };
       newItems.push(tmpIceCream);
     }
-
+    trackEvent("add-to-cart", {
+      name: icecream.name,
+      category: icecream.category,
+      quantity: counter,
+      sauceSelected
+    })
     const updatedCartItems = [...shoppingCart, ...newItems];
     setShoppingCart(updatedCartItems);
 
@@ -89,6 +95,10 @@ export default function One({
                           )
                         );
                         if (newShoppingCart.length === 0) onDelete();
+                        trackEvent("delete-item", {
+                          name: icecream.name,
+                          sauce: icecream.sauceSelected
+                        })
                       }}
                     >
                       <FontAwesomeIcon icon={faTrash} />
@@ -118,7 +128,10 @@ export default function One({
                     className="w-5 h-5 text-pink-100"
                     value={1}
                     checked={sauceSelected === sauce}
-                    onClick={() => setSauceSelected(sauce)}
+                    onClick={() => { setSauceSelected(sauce); trackEvent('sauce', {
+                      sauce,
+                      name: icecream.name
+                    }) }}
                     onChange={() => {}}
                   />
                 </div>
@@ -134,6 +147,9 @@ export default function One({
                   className="px-3 text-2xl h-9 rounded-l-md bg-gray-200 outline-none"
                   onClick={() => {
                     if (counter > 1) setCounter(counter - 1);
+                    trackEvent('increment', {
+                        name: icecream.name,
+                    })
                   }}
                 >
                   -
