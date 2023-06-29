@@ -3,10 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import useApp from "../../context/useApp";
 
 interface ILogin {
-  callback: { status: string; fn: VoidFunction };
+  onRegister?: () => void;
+  onLogin?: () => void;
 }
 
-export default function Login({ callback }: ILogin) {
+export default function Login({ onLogin, onRegister }: ILogin) {
   const { setToken, setUser, token } = useApp();
   const navigate = useNavigate();
   const [form, setForm] = useState<User>({
@@ -30,17 +31,14 @@ export default function Login({ callback }: ILogin) {
       });
       const json = await response.json();
       if (response.status === 400) {
-        if (callback.status === "error") {
-          callback.fn();
-        }
         throw new Error(json.error);
       } else {
         setToken(json.token);
         setUser(json);
         localStorage.setItem("token", json.token);
       }
-      if (callback.status !== "error" && callback.fn) {
-        callback.fn();
+      if (onLogin) {
+        onLogin();
       } else {
         return navigate("/");
       }
@@ -95,7 +93,13 @@ export default function Login({ callback }: ILogin) {
               </button>
             </div>
             <div className="text-center mb-2">
-              <Link to="/register">Create account</Link>
+              {onRegister ? (
+                <div onClick={onRegister} className="hover:cursor-pointer">
+                  Create account
+                </div>
+              ) : (
+                <Link to="/register">Create account</Link>
+              )}
             </div>
             <div className="">
               {errorMessage.length ? (
