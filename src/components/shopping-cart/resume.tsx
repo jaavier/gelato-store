@@ -5,6 +5,7 @@ import { Modal } from "../modal";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import ModalCart from ".";
+import trackEvent from "../../helpers/trackEvent";
 
 export default function ResumeShoppingCart() {
   const { shoppingCart } = useApp();
@@ -25,7 +26,10 @@ export default function ResumeShoppingCart() {
               <div className="flex justify-between items-center">
                 <div
                   className="w-full text-center ml-6 lg:ml-12 font-bold"
-                  onClick={() => shoppingCart.length && setModalIsOpen(true)}
+                  onClick={() => {
+                    if (shoppingCart.length) setModalIsOpen(true);
+                    trackEvent("btn:view-order", {});
+                  }}
                 >
                   <FontAwesomeIcon icon={faShoppingBasket} /> View order
                 </div>

@@ -1,11 +1,13 @@
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
+import trackEvent from "../helpers/trackEvent";
 
 export default function Dropdown({ label, children }: any) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
+    trackEvent(`dropdown:${!isOpen ? "open" : "close"}`, {});
     setIsOpen(!isOpen);
   };
 
