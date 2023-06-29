@@ -4,13 +4,9 @@ import useApp from "../../context/useApp";
 import { Modal } from "../modal";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-<<<<<<< Updated upstream
 import Cart from "./cart";
 
 type Step = "cart" | "login" | "register";
-=======
-import ModalCart from ".";
->>>>>>> Stashed changes
 
 export default function ResumeShoppingCart() {
   const { shoppingCart } = useApp();

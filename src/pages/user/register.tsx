@@ -1,7 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function Register() {
+interface IRegister {
+  onRegister?: () => void;
+  onLogin?: () => void;
+  afterRegister?: () => void;
+}
+
+export default function Register({ onLogin, afterRegister }: IRegister) {
   const [form, setForm] = useState<User>({
     name: "",
     username: "",
@@ -13,20 +19,21 @@ export default function Register() {
 
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    afterRegister!();
     try {
-      const response = await fetch("/api/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(form),
-      });
-      const json = await response.json();
-      if (response.status === 400) {
-        throw new Error(json.error);
-      } else {
-        window.location.href = "/user";
-      }
+      // const response = await fetch("/api/register", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify(form),
+      // });
+      // const json = await response.json();
+      // if (response.status === 400) {
+      //   throw new Error(json.error);
+      // } else {
+      //   window.location.href = "/user";
+      // }
     } catch (error) {
       const err = error as { message: string };
       console.log("Error while login:");
@@ -77,7 +84,13 @@ export default function Register() {
               </button>
             </div>
             <div className="text-center mb-2">
-              <Link to="/login">Login</Link>
+              {onLogin ? (
+                <div className="hover:cursor-pointer" onClick={onLogin}>
+                  Login
+                </div>
+              ) : (
+                <Link to="/login">Login</Link>
+              )}
             </div>
             <div className="">
               {errorMessage.length ? (

@@ -1,15 +1,16 @@
-import { Link } from "react-router-dom";
-import One from "../items/one";
-import useApp from "../../context/useApp";
 import { useCallback } from "react";
+import useApp from "../../context/useApp";
+import One from "../items/one";
+import { Link } from "react-router-dom";
 
+type Step = "cart" | "login" | "register";
 interface Cart {
   setModalIsOpen: (boolean: any) => void;
+  setStep?: (step: Step) => void;
 }
 
-export default function Cart(props: Cart) {
-  const { setModalIsOpen } = props;
-  const { setOrderReceived, shoppingCart, setShoppingCart } = useApp();
+export default function Cart({ setModalIsOpen, setStep }: Cart) {
+  const { setOrderReceived, shoppingCart, setShoppingCart, token } = useApp();
 
   const onDelete = useCallback(() => {
     setModalIsOpen(false);
@@ -35,21 +36,33 @@ export default function Cart(props: Cart) {
       </div>
       <div className="flex justify-start">
         <div className="rounded-full bg-pink-600 text-white py-2 px-4 cursor-pointer w-fit text-center">
-          <Link
-            to="/order"
-            onClick={() => {
-              setOrderReceived(shoppingCart);
-              localStorage.setItem("shoppingCart", "[]");
-              localStorage.setItem(
-                "orderReceived", // cambiar luego por multiples ordenes
-                JSON.stringify(shoppingCart)
-              );
-              setShoppingCart([]);
-              setModalIsOpen(false);
-            }}
-          >
-            Continue
-          </Link>
+          {token && token.length ? (
+            <Link
+              to="/order"
+              onClick={() => {
+                setOrderReceived(shoppingCart);
+                localStorage.setItem("shoppingCart", "[]");
+                localStorage.setItem(
+                  "orderReceived", // cambiar luego por multiples ordenes
+                  JSON.stringify(shoppingCart)
+                );
+                setShoppingCart([]);
+                setModalIsOpen(false);
+              }}
+            >
+              Continue
+            </Link>
+          ) : (
+            <a
+              className="cursor-pointer"
+              onClick={() => {
+                // setModalIsOpen(false);
+                if (setStep) setStep("login");
+              }}
+            >
+              Login
+            </a>
+          )}
         </div>
       </div>
     </div>

@@ -53,7 +53,7 @@ const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
   );
 
   useEffect(() => {
-    localStorage.setItem("token", JSON.stringify(token));
+    if (token) localStorage.setItem("token", token);
   }, [token]);
 
   const values: TypeContext = {
