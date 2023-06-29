@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useApp from "../../context/useApp";
 
-export default function Login() {
+interface ILogin {
+  callback: { status: string; fn: VoidFunction };
+}
+
+export default function Login({ callback }: ILogin) {
   const { setToken, setUser, token } = useApp();
-  console.log("🚀 ~ file: login.tsx:7 ~ Login ~ token:", token);
   const navigate = useNavigate();
   const [form, setForm] = useState<User>({
     name: "",
@@ -27,13 +30,20 @@ export default function Login() {
       });
       const json = await response.json();
       if (response.status === 400) {
+        if (callback.status === "error") {
+          callback.fn();
+        }
         throw new Error(json.error);
       } else {
         setToken(json.token);
         setUser(json);
         localStorage.setItem("token", json.token);
       }
-      return navigate("/");
+      if (callback.status !== "error" && callback.fn) {
+        callback.fn();
+      } else {
+        return navigate("/");
+      }
     } catch (error) {
       const err = error as { message: string };
       console.log("Error while login:");

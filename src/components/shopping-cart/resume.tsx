@@ -5,17 +5,12 @@ import { Modal } from "../modal";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import Cart from "./cart";
-
-type Step = "cart" | "login" | "register";
+import ModalCart from ".";
 
 export default function ResumeShoppingCart() {
   const { shoppingCart } = useApp();
   const location = useLocation();
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
-  const [step, setStep] = useState<Step>(() => {
-    // get from user
-    return "cart";
-  });
 
   return (
     shoppingCart.length > 0 && (
@@ -25,10 +20,7 @@ export default function ResumeShoppingCart() {
           onClose={() => setModalIsOpen(false)}
           children={
             <div>
-              <div>
-                <Cart setModalIsOpen={setModalIsOpen} />
-              </div>
-              <div></div>
+              <ModalCart setModalIsOpen={setModalIsOpen} />
             </div>
           }
         />
