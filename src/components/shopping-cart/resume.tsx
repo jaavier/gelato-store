@@ -19,7 +19,7 @@ export default function ResumeShoppingCart() {
           onClose={() => setModalIsOpen(false)}
           children={<ModalCart setModalIsOpen={setModalIsOpen} />}
         />
-        {location.pathname !== "/order" && shoppingCart.length && (
+        {location.pathname === "/" && shoppingCart.length && (
           <div className="fixed bottom-10 lg:w-1/3 md:w-1/2 w-11/12 px-14">
             <div className="rounded-full bg-pink-600 opacity-90 text-lg text-white p-2 cursor-pointer">
               <div className="flex justify-between items-center">

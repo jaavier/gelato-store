@@ -28,10 +28,7 @@ const RenderStep = ({ setModalIsOpen }: Cart) => {
     return (
       <Register
         onLogin={() => setStep("login")}
-        afterRegister={() => {
-          setStep("cart");
-          setToken("AAAAAAAAAAAAAAAA");
-        }}
+        afterRegister={() => alert("A")}
       />
     );
   } else if (step === "cart") {

@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
+import useApp from "../../context/useApp";
 
 interface IRegister {
   onRegister?: () => void;
@@ -8,6 +9,7 @@ interface IRegister {
 }
 
 export default function Register({ onLogin, afterRegister }: IRegister) {
+  const { setToken } = useApp()
   const [form, setForm] = useState<User>({
     name: "",
     username: "",
@@ -19,7 +21,11 @@ export default function Register({ onLogin, afterRegister }: IRegister) {
 
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    afterRegister!();
+    if (afterRegister) afterRegister();
+    setToken("AAAAAAAAAAAA")
+    window.location.href = '/'
+    return
+    console.log("🚀 ~ file: register.tsx:43 ~ onSubmit ~ afterRegister:", afterRegister)
     try {
       // const response = await fetch("/api/register", {
       //   method: "POST",

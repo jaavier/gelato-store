@@ -10,6 +10,7 @@ import * as amplitude from '@amplitude/analytics-browser';
 amplitude.init('2b7aa12c96c78a5f1066d5cffd29283d',"", {
   defaultTracking: {
     pageViews: false,
+    formInteractions: false
   }
 })
 
