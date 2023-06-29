@@ -14,7 +14,7 @@ export default function Categories({ icecreams }: any) {
       if (scrollPercentage > thresholdPercentage) {
         setIsMenuSticky(scrollPercentage >= thresholdPercentage);
       } else {
-        setIsMenuSticky(false)
+        setIsMenuSticky(false);
       }
       if (scrollPercentage >= 0 && scrollPercentage < 30) {
         setActiveCategory("Classics");
