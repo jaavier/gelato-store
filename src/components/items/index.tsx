@@ -51,7 +51,7 @@ export default function Items() {
       {Object.keys(icecreams).map((category: string, index: number) => (
         <div id={`${category}`}>
           <div
-            className="pl-5 py-5 border bg-white shadow-sm mb-3 rounded-xl"
+            className={`pl-5 py-5 border bg-white shadow-sm mb-3 ${index === 0 ? 'rounded-b-xl':'rounded-xl' }`}
             key={index}
           >
             <div className="text-3xl font-bold font-pacific tracking-wide flex justify-between">
