@@ -7,6 +7,9 @@ import IceCream7 from "../assets/icecream-7.svg";
 import IceCream8 from "../assets/icecream-8.svg";
 import IceCream9 from "../assets/icecream-9.svg";
 import IceCream13 from "../assets/icecream-13.svg";
+import IceCream10 from "../assets/icecream-10.svg";
+import IceCream11 from "../assets/icecream-11.svg";
+import IceCream12 from "../assets/icecream-12.svg";
 
 const icecreams: IceCreamsByCategory = {
   Classics: [
@@ -111,6 +114,44 @@ const icecreams: IceCreamsByCategory = {
       image: IceCream9,
       category: "Nuts and Sweets",
       sauces: ["Salted Caramel Sauce", "Whipped Cream", "Sea Salt"],
+      sauceSelected: "",
+    },
+  ],
+  Specials: [
+    {
+      id: "10",
+      name: "Speculoos Delight",
+      price: 5.99,
+      description:
+        "Creamy speculoos-flavored ice cream with caramelized cookie chunks",
+      likes: 25,
+      image: IceCream10,
+      category: "Specials",
+      sauces: ["Caramel Sauce", "Speculoos Spread", "Whipped Cream"],
+      sauceSelected: "",
+    },
+    {
+      id: "11",
+      name: "Matcha Bliss",
+      price: 5.99,
+      description:
+        "Indulge in the delightful taste of matcha green tea ice cream",
+      likes: 18,
+      image: IceCream11,
+      category: "Specials",
+      sauces: ["Matcha Syrup", "Red Bean Paste", "Mochi"],
+      sauceSelected: "",
+    },
+    {
+      id: "12",
+      name: "Salted Caramel Pretzel",
+      price: 5.99,
+      description:
+        "A heavenly combination of salted caramel ice cream and crunchy pretzel pieces",
+      likes: 20,
+      image: IceCream12,
+      category: "Specials",
+      sauces: ["Salted Caramel Sauce", "Crushed Pretzels", "Whipped Cream"],
       sauceSelected: "",
     },
   ],
