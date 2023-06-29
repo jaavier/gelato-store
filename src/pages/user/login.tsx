@@ -37,7 +37,11 @@ export default function Login({ onLogin, onRegister }: ILogin) {
         setUser(json);
         localStorage.setItem("token", json.token);
       }
-      return navigate("/");
+      if (onLogin) {
+        onLogin();
+      } else {
+        return navigate("/");
+      }
     } catch (error) {
       const err = error as { message: string };
       console.log("Error while login:");
@@ -89,7 +93,13 @@ export default function Login({ onLogin, onRegister }: ILogin) {
               </button>
             </div>
             <div className="text-center mb-2">
-              <Link to="/register">Create account</Link>
+              {onRegister ? (
+                <div className="hover:cursor-pointer" onClick={onRegister}>
+                  Create account
+                </div>
+              ) : (
+                <Link to="/register">Create account</Link>
+              )}
             </div>
             <div className="">
               {errorMessage.length ? (

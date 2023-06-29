@@ -7,9 +7,11 @@ type Step = "cart" | "login" | "register";
 interface Cart {
   setModalIsOpen: (boolean: any) => void;
   setStep?: (step: Step) => void;
+  step?: string;
 }
 
-export default function Cart({ setModalIsOpen, setStep }: Cart) {
+export default function Cart({ setModalIsOpen, setStep, step }: Cart) {
+  console.log("🚀 ~ file: cart.tsx:14 ~ Cart ~ step:", step);
   const { setOrderReceived, shoppingCart, setShoppingCart, token } = useApp();
 
   const onDelete = useCallback(() => {

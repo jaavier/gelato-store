@@ -16,6 +16,7 @@ const RenderStep = ({ setModalIsOpen }: Cart) => {
   const [step, setStep] = useState<Step>(
     () => "cart" // token && token.length ? "cart" : "login"
   );
+  console.log("🚀 ~ file: index.tsx:19 ~ RenderStep ~ step:", step);
   if (step === "login") {
     return (
       <Login
@@ -34,7 +35,9 @@ const RenderStep = ({ setModalIsOpen }: Cart) => {
       />
     );
   } else if (step === "cart") {
-    return <Cart setModalIsOpen={setModalIsOpen} setStep={setStep} />;
+    return (
+      <Cart setModalIsOpen={setModalIsOpen} step={step} setStep={setStep} />
+    );
   }
 };
 
