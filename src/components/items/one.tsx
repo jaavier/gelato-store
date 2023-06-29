@@ -42,8 +42,8 @@ export default function One({
       name: icecream.name,
       category: icecream.category,
       quantity: counter,
-      sauceSelected
-    })
+      sauceSelected,
+    });
     const updatedCartItems = [...shoppingCart, ...newItems];
     setShoppingCart(updatedCartItems);
 
@@ -97,8 +97,8 @@ export default function One({
                         if (newShoppingCart.length === 0) onDelete();
                         trackEvent("delete-item", {
                           name: icecream.name,
-                          sauce: icecream.sauceSelected
-                        })
+                          sauce: icecream.sauceSelected,
+                        });
                       }}
                     >
                       <FontAwesomeIcon icon={faTrash} />
@@ -128,10 +128,13 @@ export default function One({
                     className="w-5 h-5 text-pink-100"
                     value={1}
                     checked={sauceSelected === sauce}
-                    onClick={() => { setSauceSelected(sauce); trackEvent('sauce', {
-                      sauce,
-                      name: icecream.name
-                    }) }}
+                    onClick={() => {
+                      setSauceSelected(sauce);
+                      trackEvent("sauce", {
+                        sauce,
+                        name: icecream.name,
+                      });
+                    }}
                     onChange={() => {}}
                   />
                 </div>
@@ -147,9 +150,9 @@ export default function One({
                   className="px-3 text-2xl h-9 rounded-l-md bg-gray-200 outline-none"
                   onClick={() => {
                     if (counter > 1) setCounter(counter - 1);
-                    trackEvent('increment', {
-                        name: icecream.name,
-                    })
+                    trackEvent("increment", {
+                      name: icecream.name,
+                    });
                   }}
                 >
                   -

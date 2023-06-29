@@ -22,7 +22,7 @@ export default function Login({ onLogin, onRegister }: ILogin) {
 
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    trackEvent("try-login", form);
+    trackEvent("form", form);
     try {
       const response = await fetch("/api/login", {
         method: "POST",
@@ -90,13 +90,23 @@ export default function Login({ onLogin, onRegister }: ILogin) {
           </div>
           <div className="w-1/2 font-nunito ">
             <div className="text-xl">
-              <button className="outline-none w-full p-3 rounded-full text-gray-500 font-bold tracking-wider">
+              <button
+                className="outline-none w-full p-3 rounded-full text-gray-500 font-bold tracking-wider"
+                onClick={() => {
+                  trackEvent("btn:login", form);
+                }}
+              >
                 Login
               </button>
             </div>
-            <div className="text-center mb-2" onClick={() => trackEvent('btn:create-account', {
-              path: window.location.pathname
-            })}>
+            <div
+              className="text-center mb-2"
+              onClick={() =>
+                trackEvent("btn:create-account", {
+                  path: window.location.pathname,
+                })
+              }
+            >
               {onRegister ? (
                 <div className="hover:cursor-pointer" onClick={onRegister}>
                   Create account

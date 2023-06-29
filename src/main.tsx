@@ -5,14 +5,14 @@ import { createServer, Model, Request, Response } from "miragejs";
 import icecreams from "./db/icecreams";
 import users from "./db/users";
 import "./index.css";
-import * as amplitude from '@amplitude/analytics-browser';
+import * as amplitude from "@amplitude/analytics-browser";
 
-amplitude.init('2b7aa12c96c78a5f1066d5cffd29283d',"", {
+amplitude.init("2b7aa12c96c78a5f1066d5cffd29283d", "", {
   defaultTracking: {
     pageViews: false,
-    formInteractions: false
-  }
-})
+    formInteractions: false,
+  },
+});
 
 const server = createServer({
   models: {
@@ -21,7 +21,7 @@ const server = createServer({
 
   routes() {
     this.namespace = "api";
-    this.passthrough('https://api2.amplitude.com/**');
+    this.passthrough("https://api2.amplitude.com/**");
     this.post("/login", (schema: any, request: Request): any => {
       const body = JSON.parse(request.requestBody);
       const results: User[] = schema.db.users.where({

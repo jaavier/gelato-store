@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, redirect } from "react-router-dom";
 import useApp from "../../context/useApp";
+import trackEvent from "../../helpers/trackEvent";
 
 interface IRegister {
   onRegister?: () => void;
@@ -9,7 +10,7 @@ interface IRegister {
 }
 
 export default function Register({ onLogin, afterRegister }: IRegister) {
-  const { setToken } = useApp()
+  const { setToken } = useApp();
   const [form, setForm] = useState<User>({
     name: "",
     username: "",
@@ -22,10 +23,14 @@ export default function Register({ onLogin, afterRegister }: IRegister) {
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (afterRegister) afterRegister();
-    setToken("AAAAAAAAAAAA")
-    window.location.href = '/'
-    return
-    console.log("🚀 ~ file: register.tsx:43 ~ onSubmit ~ afterRegister:", afterRegister)
+    setToken("AAAAAAAAAAAA");
+    trackEvent("btn:create-account", form);
+    window.location.href = "/";
+    return;
+    console.log(
+      "🚀 ~ file: register.tsx:43 ~ onSubmit ~ afterRegister:",
+      afterRegister
+    );
     try {
       // const response = await fetch("/api/register", {
       //   method: "POST",
@@ -89,7 +94,12 @@ export default function Register({ onLogin, afterRegister }: IRegister) {
                 Create account
               </button>
             </div>
-            <div className="text-center mb-2">
+            <div
+              className="text-center mb-2"
+              onClick={() => {
+                trackEvent("btn:login", form);
+              }}
+            >
               {onLogin ? (
                 <div className="hover:cursor-pointer" onClick={onLogin}>
                   Login
