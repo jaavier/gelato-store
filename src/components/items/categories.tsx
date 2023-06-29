@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import trackEvent from "../../helpers/trackEvent";
 
 export default function Categories({ icecreams }: any) {
   const [isMenuSticky, setIsMenuSticky] = useState(false);
@@ -53,6 +54,11 @@ export default function Categories({ icecreams }: any) {
                 activeCategory === category && "font-bold"
               }`}
               key={index}
+              onClick={() => {
+                trackEvent("category", {
+                  category,
+                });
+              }}
             >
               {category}
             </a>
@@ -71,6 +77,11 @@ export default function Categories({ icecreams }: any) {
               activeCategory === category && "font-bold"
             }`}
             key={index}
+            onClick={() => {
+              trackEvent("category", {
+                category,
+              });
+            }}
           >
             {category}
           </a>

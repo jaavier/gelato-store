@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import useApp from "../../context/useApp";
 import trackEvent from "../../helpers/trackEvent";
 
