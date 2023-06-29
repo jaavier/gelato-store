@@ -6,8 +6,6 @@ import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import ModalCart from ".";
 
-type Step = "cart" | "login" | "register";
-
 export default function ResumeShoppingCart() {
   const { shoppingCart } = useApp();
   const location = useLocation();
