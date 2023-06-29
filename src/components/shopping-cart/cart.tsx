@@ -11,7 +11,7 @@ interface Cart {
   step?: string;
 }
 
-export default function Cart({ setModalIsOpen, setStep, step }: Cart) {
+export default function Cart({ setModalIsOpen, setStep }: Cart) {
   const {
     orderReceived,
     setOrderReceived,
