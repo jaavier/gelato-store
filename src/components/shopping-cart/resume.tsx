@@ -17,9 +17,7 @@ export default function ResumeShoppingCart() {
         <Modal
           isOpen={modalIsOpen}
           onClose={() => setModalIsOpen(false)}
-          children={
-            <ModalCart setModalIsOpen={setModalIsOpen} />
-          }
+          children={<ModalCart setModalIsOpen={setModalIsOpen} />}
         />
         {location.pathname !== "/order" && shoppingCart.length && (
           <div className="fixed bottom-10 lg:w-1/3 md:w-1/2 w-11/12 px-14">
