@@ -2,10 +2,10 @@
 // import Items from "../components/items";
 
 import { useEffect } from "react";
-import One from "../components/items/one";
-import useApp from "../context/useApp";
+import One from "../../components/items/one";
+import useApp from "../../context/useApp";
 
-export default function OrderSent() {
+export default function PendingOrders() {
   const { orderReceived } = useApp();
 
   useEffect(() => {

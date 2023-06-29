@@ -3,9 +3,10 @@ import Home from "./pages/home";
 import Navbar from "./components/navbar";
 import ResumeShoppingCart from "./components/shopping-cart/resume";
 import { ContextProvider } from "./context";
-import OrderSent from "./pages/order-sent";
+import PastOrders from "./pages/orders/pending-orders";
 import Login from "./pages/user/login";
 import Register from "./pages/user/register";
+import PendingOrders from "./pages/orders/pending-orders";
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
             <Navbar />
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/order" element={<OrderSent />} />
+              <Route path="/orders/pending" element={<PendingOrders />} />
+              <Route path="/orders" element={<PastOrders />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
             </Routes>
