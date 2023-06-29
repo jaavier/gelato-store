@@ -1,6 +1,8 @@
 import { useState } from "react";
 import Login from "../../pages/user/login";
 import Cart from "./cart";
+import Register from "../../pages/user/register";
+import useApp from "../../context/useApp";
 
 type Step = "cart" | "login" | "register";
 
@@ -10,17 +12,24 @@ interface Cart {
 }
 
 const RenderStep = ({ setModalIsOpen }: Cart) => {
+  const { setToken } = useApp();
   const [step, setStep] = useState<Step>(
     () => "cart" // token && token.length ? "cart" : "login"
   );
   if (step === "login") {
     return (
       <Login
-        callback={{
-          fn: () => {
-            setStep("cart");
-          },
-          status: "ok",
+        onRegister={() => setStep("register")}
+        onLogin={() => setStep("cart")}
+      />
+    );
+  } else if (step === "register") {
+    return (
+      <Register
+        onLogin={() => setStep("login")}
+        afterRegister={() => {
+          setStep("cart");
+          setToken("AAAAAAAAAAAAAAAA");
         }}
       />
     );
