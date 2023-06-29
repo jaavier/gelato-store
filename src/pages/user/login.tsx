@@ -1,7 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useApp from "../../context/useApp";
 
 export default function Login() {
+  const { setUser } = useApp()
+  const navigate = useNavigate()
   const [form, setForm] = useState<User>({
     name: "",
     username: "",
@@ -25,8 +28,9 @@ export default function Login() {
       if (response.status === 400) {
         throw new Error(json.error);
       } else {
-        window.location.href = "/user";
+        setUser(json)
       }
+      return navigate("/")
     } catch (error) {
       const err = error as { message: string };
       console.log("Error while login:");
@@ -43,7 +47,9 @@ export default function Login() {
     <div className="bg-white py-10">
       <form onSubmit={onSubmit}>
         <div className="flex items-center flex-col gap-2">
-        <div className="mb-5 text-2xl font-extrabold tracking-wider font-nunito">Login</div>
+          <div className="mb-5 text-2xl font-extrabold tracking-wider font-nunito">
+            Login
+          </div>
           <div className="w-1/2">
             <div className="font-nunito tracking-wide text-lg font-bold">
               Username

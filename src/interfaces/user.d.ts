@@ -6,4 +6,5 @@ declare interface User {
   password: string;
   lastOrder?: any;
   role: Role;
+  token?: string;
 }

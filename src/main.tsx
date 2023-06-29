@@ -28,6 +28,7 @@ const server = createServer({
           role: user.role,
           name: user.name,
           lastOrder: user.lastOrder,
+          token: user.token
         };
       } else {
         return new Response(400, {}, { error: "Verify your credentials" });

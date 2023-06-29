@@ -5,6 +5,8 @@ export interface TypeContext {
   setOrderReceived: React.Dispatch<React.SetStateAction<IceCream[]>>;
   shoppingCart: IceCream[];
   setShoppingCart: React.Dispatch<React.SetStateAction<IceCream[]>>;
+  setUser: React.Dispatch<React.SetStateAction<User>>
+  user?: User
 }
 
 const Context = createContext<TypeContext>({
@@ -12,6 +14,8 @@ const Context = createContext<TypeContext>({
   setOrderReceived: () => {},
   shoppingCart: [],
   setShoppingCart: () => {},
+  setUser: () => {},
+  user: undefined
 });
 
 interface ContextProviderProps {
@@ -19,6 +23,13 @@ interface ContextProviderProps {
 }
 
 const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
+  const [user, setUser] = useState<User>({
+    name: "",
+    password: "",
+    role: "visitor",
+    username: "",
+    lastOrder: null
+  })
   const [orderReceived, setOrderReceived] = useState<IceCream[]>(() =>
     JSON.parse(localStorage.getItem("orderReceived") || "[]")
   );
@@ -31,6 +42,8 @@ const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
     setOrderReceived,
     shoppingCart,
     setShoppingCart,
+    setUser,
+    user
   };
 
   return <Context.Provider value={values}>{children}</Context.Provider>;

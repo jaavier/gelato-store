@@ -5,6 +5,7 @@ const users: User[] = [
     password: "1234567890",
     lastOrder: null,
     role: "user",
+    token: "3HgT7dP4fqR1zKvYO0Uo"
   },
   {
     name: "Kitchen",
@@ -12,6 +13,7 @@ const users: User[] = [
     password: "kitchen",
     lastOrder: null,
     role: "admin",
+    token: "9EaS2rM6xbY3qVlXhIgW"
   },
   {
     name: "Guest",
@@ -19,6 +21,7 @@ const users: User[] = [
     password: "guest",
     lastOrder: null,
     role: "banned",
+    token: "5NjL4HdA2oP1fGvSbQrE"
   },
 ];
 
