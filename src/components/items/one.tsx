@@ -21,7 +21,7 @@ export default function One({
   handleClick,
   showCounter = false,
   deletable = false,
-  onDelete = (data?: any) => {},
+  onDelete = (_data?: any) => {},
 }: any) {
   const { shoppingCart, setShoppingCart } = useApp();
   const [counter, setCounter] = useState<number>(1);

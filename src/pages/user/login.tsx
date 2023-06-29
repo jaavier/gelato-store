@@ -2,9 +2,19 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useApp from "../../context/useApp";
 
+<<<<<<< Updated upstream
 export default function Login() {
   const { setToken, setUser, token } = useApp();
   console.log("🚀 ~ file: login.tsx:7 ~ Login ~ token:", token);
+=======
+interface ILogin {
+  onRegister?: () => void;
+  onLogin?: () => void;
+}
+
+export default function Login({ onLogin, onRegister }: ILogin) {
+  const { setToken, setUser } = useApp();
+>>>>>>> Stashed changes
   const navigate = useNavigate();
   const [form, setForm] = useState<User>({
     name: "",
