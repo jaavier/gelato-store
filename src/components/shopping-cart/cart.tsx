@@ -2,6 +2,7 @@ import { useCallback } from "react";
 import useApp from "../../context/useApp";
 import One from "../items/one";
 import { Link } from "react-router-dom";
+import trackEvent from "../../helpers/trackEvent";
 
 type Step = "cart" | "login" | "register";
 interface Cart {
@@ -10,9 +11,14 @@ interface Cart {
   step?: string;
 }
 
-export default function Cart({ setModalIsOpen, setStep, step }: Cart) {
-  console.log("🚀 ~ file: cart.tsx:14 ~ Cart ~ step:", step);
-  const { setOrderReceived, shoppingCart, setShoppingCart, token } = useApp();
+export default function Cart({ setModalIsOpen, setStep }: Cart) {
+  const {
+    orderReceived,
+    setOrderReceived,
+    shoppingCart,
+    setShoppingCart,
+    token,
+  } = useApp();
 
   const onDelete = useCallback(() => {
     setModalIsOpen(false);
@@ -50,6 +56,7 @@ export default function Cart({ setModalIsOpen, setStep, step }: Cart) {
                 );
                 setShoppingCart([]);
                 setModalIsOpen(false);
+                trackEvent("btn:cart:continue", orderReceived);
               }}
             >
               Continue
@@ -60,6 +67,7 @@ export default function Cart({ setModalIsOpen, setStep, step }: Cart) {
               onClick={() => {
                 // setModalIsOpen(false);
                 if (setStep) setStep("login");
+                trackEvent("btn:cart:login", {});
               }}
             >
               Login

@@ -1,6 +1,7 @@
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import trackEvent from "../../helpers/trackEvent";
 
 type ModalType = {
   isOpen: boolean;
@@ -11,6 +12,7 @@ type ModalType = {
 export function Modal({ isOpen, onClose, children }: ModalType) {
   const closeModal = () => {
     onClose();
+    trackEvent("btn:cart:close-modal", {});
   };
 
   return (

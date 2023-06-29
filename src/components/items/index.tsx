@@ -49,7 +49,7 @@ export default function Items() {
       />
       <Categories icecreams={icecreams} />
       {Object.keys(icecreams).map((category: string, index: number) => (
-        <div id={`${category}`}>
+        <div id={`${category}`} key={index}>
           <div
             className={`pl-5 py-5 border bg-white shadow-sm mb-3 ${
               index === 0 ? "rounded-b-xl" : "rounded-xl"
