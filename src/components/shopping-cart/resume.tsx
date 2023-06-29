@@ -6,16 +6,16 @@ import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import Cart from "./cart";
 
-type Step = 'cart' | 'login' | 'register'
+type Step = "cart" | "login" | "register";
 
 export default function ResumeShoppingCart() {
   const { shoppingCart } = useApp();
   const location = useLocation();
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const [step, setStep] = useState<Step>(() => {
-    // get from user 
-    return "cart"
-  })
+    // get from user
+    return "cart";
+  });
 
   return (
     shoppingCart.length > 0 && (
