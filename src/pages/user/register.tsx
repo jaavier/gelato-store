@@ -70,7 +70,7 @@ export default function Register({ onLogin, afterRegister }: IRegister) {
             <div>
               <input
                 name="username"
-                value="demo@jguajardo.com"
+                // value="demo@jguajardo.com"
                 onChange={handleChange}
                 className="border px-2 py-2 outline-none w-full rounded-sm"
               />
@@ -83,7 +83,7 @@ export default function Register({ onLogin, afterRegister }: IRegister) {
             <div>
               <input
                 name="password"
-                value="1234567890"
+                // value="1234567890"
                 onChange={handleChange}
                 type="password"
                 className="border px-2 py-2 outline-none w-full rounded-sm"
